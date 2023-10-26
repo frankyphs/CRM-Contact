@@ -1,0 +1,21 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.main-menu {
+  position: relative;
+  background-color: darkgreen;
+  padding: 16px;
+  height: auto;
+}
+
+.main-section {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  background-color: green;
+}
