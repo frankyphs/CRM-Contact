@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Persona,
   Tag,
@@ -32,8 +32,8 @@ export const OptionDropdown = (props: any) => {
           props.size === "small"
             ? { fontSize: "12px" }
             : props.size === "large"
-            ? { fontSize: "16px" }
-            : { fontSize: "14px" }
+              ? { fontSize: "16px" }
+              : { fontSize: "14px" }
         }
       >
         {props.option?.label}
@@ -79,15 +79,15 @@ export const OptionPersona = (props: any) => {
             props.size === "small"
               ? { style: { fontSize: "12px" } }
               : props.size === "large"
-              ? { style: { fontSize: "16px" } }
-              : { style: { fontSize: "14px" } }
+                ? { style: { fontSize: "16px" } }
+                : { style: { fontSize: "14px" } }
           }
           size={
             props.size === "large"
               ? "medium"
               : props.size === "medium"
-              ? "small"
-              : "extra-small"
+                ? "small"
+                : "extra-small"
           }
           textAlignment="center"
           avatar={
@@ -115,15 +115,15 @@ export const OptionPersona = (props: any) => {
             props.size === "small"
               ? { style: { fontSize: "12px" } }
               : props.size === "large"
-              ? { style: { fontSize: "16px" } }
-              : { style: { fontSize: "14px" } }
+                ? { style: { fontSize: "16px" } }
+                : { style: { fontSize: "14px" } }
           }
           size={
             props.size === "large"
               ? "medium"
               : props.size === "medium"
-              ? "small"
-              : "extra-small"
+                ? "small"
+                : "extra-small"
           }
           textAlignment="center"
           avatar={
@@ -204,8 +204,8 @@ export const OptionTags = (props: any) => {
             props.size === "large"
               ? "medium"
               : props.size === "small"
-              ? "extra-small"
-              : "small"
+                ? "extra-small"
+                : "small"
           }
           appearance="brand"
         >
@@ -231,8 +231,8 @@ export const OptionTags = (props: any) => {
             props.size === "large"
               ? "medium"
               : props.size === "small"
-              ? "extra-small"
-              : "small"
+                ? "extra-small"
+                : "small"
           }
           appearance="brand"
         >
@@ -291,8 +291,8 @@ export const MultiOptionTags = (props: any) => {
               props.size === "large"
                 ? "medium"
                 : props.size === "small"
-                ? "extra-small"
-                : "small"
+                  ? "extra-small"
+                  : "small"
             }
             appearance="brand"
             value={tag.id}

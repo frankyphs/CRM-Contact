@@ -59,7 +59,7 @@ const Kanban: React.FC<IKanban> = (props) => {
     props.onCardDoubleClick?.(card);
   };
 
-  const handleColumnClick = (event: React.MouseEvent, column: any) => {
+  const handleColumnClick = (_: any, column: any) => {
     props.onColumnClick?.(column);
   };
 
@@ -153,7 +153,7 @@ const Kanban: React.FC<IKanban> = (props) => {
   };
 
   // Handle Add Card Click
-  const handleAddCardClick = (event: React.MouseEvent, column: any) => {
+  const handleAddCardClick = (_: any, column: any) => {
     if (props.defaultCards) {
       const defaultKey = generateUniqueKey();
       const defaultNewCard = {
@@ -216,11 +216,11 @@ const Kanban: React.FC<IKanban> = (props) => {
 
               {/* Add Column Button */}
               {props.addColumnEnabled ===
-              false ? null : props.onRenderAddColumnButton ? (
-                <div onClick={handleAddColumnClick}>
-                  {props.onRenderAddColumnButton()}
-                </div>
-              ) : (
+                false ? null : props.onRenderAddColumnButton ? (
+                  <div onClick={handleAddColumnClick}>
+                    {props.onRenderAddColumnButton()}
+                  </div>
+                ) : (
                 <AddColumn
                   columnOrientation={props.columnOrientation}
                   onAddColumnClick={handleAddColumnClick}

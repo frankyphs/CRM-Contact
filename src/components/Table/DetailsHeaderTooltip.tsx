@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ActionButton,
   BaseButton,
@@ -8,13 +8,10 @@ import {
   Dropdown,
   FontIcon,
   IColumn,
-  Icon,
   IconButton,
-  IDetailsColumnRenderTooltipProps,
   IDropdownOption,
   IIconProps,
   IPersonaProps,
-  ITextFieldProps,
   Label,
   mergeStyles,
   SpinButton,
@@ -29,7 +26,7 @@ import PeoplePicker from '../PeoplePicker';
 const filterSettingsIcon: IIconProps = { iconName: "FilterSettings" };
 const activeFilterIcon: IIconProps = { iconName: "FilterSolid" };
 
-const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> = ({tooltipProps}) => {
+const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> = ({ tooltipProps }) => {
   const filterButtonId = useId("filter-button");
 
   const headerStyle = mergeStyles({
@@ -38,8 +35,8 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
     justifyContent: "space-between"
   });
 
-  const [isMouseOver, {setTrue: mouseEnter, setFalse: mouseLeave}] = useBoolean(false);
-  const [isCalloutHidden, {setTrue: hideCallout, setFalse: showCallout, toggle: toggleCallout}] = useBoolean(true);
+  const [isMouseOver, { setTrue: mouseEnter, setFalse: mouseLeave }] = useBoolean(false);
+  const [isCalloutHidden, { setTrue: hideCallout, toggle: toggleCallout }] = useBoolean(true);
   const [filterValue, setFilterValue] = React.useState<any>();
 
 
@@ -63,13 +60,13 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
   }
 
   const handleDateFilterChange = (date: Date | null | undefined, position: "from" | "to", column: IColumn) => {
-    let newFilterValue: {from: Date | null | undefined, to: Date | null | undefined} = {...filterValue};
+    let newFilterValue: { from: Date | null | undefined, to: Date | null | undefined } = { ...filterValue };
     if (filterValue?.from !== undefined && filterValue?.to !== undefined) {
       if (position === "from") newFilterValue.from = date;
       else newFilterValue.to = date;
     } else {
-      if (position === "from") newFilterValue = {from: date, to: null};
-      else newFilterValue = {from: null, to: date};
+      if (position === "from") newFilterValue = { from: date, to: null };
+      else newFilterValue = { from: null, to: date };
     }
     setFilterValue(newFilterValue);
 
@@ -83,7 +80,7 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
   const handleDateClearFilterClick = (event: React.MouseEvent<HTMLDivElement | HTMLAnchorElement | HTMLButtonElement | BaseButton | Button | HTMLSpanElement, MouseEvent>, position: "from" | "to", column: IColumn) => {
     event.stopPropagation();
 
-    let newFilterValue: {from: Date | null | undefined, to: Date | null | undefined} = {...filterValue};
+    let newFilterValue: { from: Date | null | undefined, to: Date | null | undefined } = { ...filterValue };
     if (position === "from") newFilterValue.from = null;
     else if (position === "to") newFilterValue.to = null;
 
@@ -96,8 +93,8 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
   const handleDateFilterSuffixRender = (column: IColumn, position: "from" | "to") => {
     return (
       <ActionButton
-        iconProps={{iconName: "Clear"}}
-        styles={{root: {backGroundColor: "#F3F2F1", height: "85%"}}}
+        iconProps={{ iconName: "Clear" }}
+        styles={{ root: { backGroundColor: "#F3F2F1", height: "85%" } }}
         onClick={event => handleDateClearFilterClick(event, position, column)}
       />
     )
@@ -114,7 +111,7 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
       <Stack horizontal horizontalAlign='space-between'>
         {defaultRender!(props)}
         <IconButton
-          iconProps={{iconName: "Clear"}}
+          iconProps={{ iconName: "Clear" }}
           onClick={event => handleClearFilterClick(event, column)}
         />
       </Stack>
@@ -131,7 +128,7 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
     if (filterValue) {
       return (
         <ActionButton
-          iconProps={{iconName: "Clear"}}
+          iconProps={{ iconName: "Clear" }}
           onClick={event => handleClearFilterClick(event, column)}
         />
       )
@@ -156,23 +153,23 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
               onChange={(_, newValue: string | undefined) => handleSpinButtonChange(newValue, column)}
             />
             <ActionButton
-              style={filterValue !== undefined ? {visibility: "visible"} : {visibility: "hidden"}}
-              iconProps={{iconName: "Clear"}}
+              style={filterValue !== undefined ? { visibility: "visible" } : { visibility: "hidden" }}
+              iconProps={{ iconName: "Clear" }}
               onClick={(event) => handleClearFilterClick(event, column)}
             />
           </Stack>
         );
       case "datepicker":
         return (
-          <Stack tokens={{childrenGap: "10px"}}>
+          <Stack tokens={{ childrenGap: "10px" }}>
             <DatePicker
               label="From"
               value={filterValue?.from ? filterValue.from : undefined}
               onSelectDate={date => handleDateFilterChange(date, "from", column)}
               formatDate={date => moment(date).format("DD MMM yyyy")}
-              styles={{icon: filterValue?.from ? {display: "none"} : {display: "block"}}}
+              styles={{ icon: filterValue?.from ? { display: "none" } : { display: "block" } }}
               textField={{
-                styles: {suffix: {padding: "0 4px"}},
+                styles: { suffix: { padding: "0 4px" } },
                 onRenderPrefix: filterValue?.from ? () => handleDateFilterPrefixRender() : undefined,
                 onRenderSuffix: filterValue?.from ? () => handleDateFilterSuffixRender(column, "from") : undefined
               }}
@@ -184,9 +181,9 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
               value={filterValue?.to ? filterValue.to : undefined}
               onSelectDate={date => handleDateFilterChange(date, "to", column)}
               formatDate={date => moment(date).format("DD MMM yyyy")}
-              styles={{icon: filterValue?.to ? {display: "none"} : {display: "block"}}}
+              styles={{ icon: filterValue?.to ? { display: "none" } : { display: "block" } }}
               textField={{
-                styles: {suffix: {padding: "0 4px"}},
+                styles: { suffix: { padding: "0 4px" } },
                 onRenderPrefix: filterValue?.to ? () => handleDateFilterPrefixRender() : undefined,
                 onRenderSuffix: filterValue?.to ? () => handleDateFilterSuffixRender(column, "to") : undefined
               }}
@@ -205,7 +202,7 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
         return (
           <Dropdown
             selectedKey={filterValue ?? ""}
-            options={[{key: "false", text: "No"}, {key: "true", text: "Yes"}]}
+            options={[{ key: "false", text: "No" }, { key: "true", text: "Yes" }]}
             onRenderTitle={(props, defaultRender) => handleDropdownTitleRender(props, defaultRender, column)}
             onChange={(_, option) => handleDropdownChange(option, column)}
           />
@@ -223,9 +220,9 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
       default:
         return (
           <TextField
-            styles={{suffix: {padding: 0}}}
+            styles={{ suffix: { padding: 0 } }}
             value={filterValue ?? ""}
-            onRenderSuffix={() => handleTextFilterSuffixRender(column)}  
+            onRenderSuffix={() => handleTextFilterSuffixRender(column)}
             onChange={(_, newValue: string | undefined) => handleTextFilterChange(newValue, column)}
           />
         );
@@ -260,7 +257,7 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
           />
         }
       </span>
-      
+
       <Callout
         setInitialFocus
         role="dialog"
@@ -278,7 +275,7 @@ const DetailsHeaderTooltip: React.FunctionComponent<IDetailsHeaderTooltipProps> 
       >
         <Stack horizontalAlign="end">
           <IconButton
-            iconProps={{iconName: "Cancel"}}
+            iconProps={{ iconName: "Cancel" }}
             onClick={hideCallout}
           />
         </Stack>

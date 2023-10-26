@@ -9,7 +9,7 @@ import {
   makeStyles,
   Text,
 } from "@fluentui/react-components"
-import { BaseFieldProps, FieldEventProps } from "../utils/field.interface"
+// import { BaseFieldProps, FieldEventProps } from "../utils/field.interface"
 import ActionButtonContainer from "../CommonComponents/ActionButtonContainer"
 import {
   ActionButtonContainerProps,

@@ -1,11 +1,11 @@
 import { Button } from "@fluentui/react-components"
 import { Add16Filled } from "@fluentui/react-icons"
-import InputField from "../components/components/Field/InputField/InputField";
-import DropdownField from "../components/components/Field/DropdownField/DropdownField";
-import { TableV9 } from "../components/components/Table_V9";
+import InputField from "../components/Field/InputField/InputField";
+import DropdownField from "../components/Field/DropdownField/DropdownField";
+import { TableV9 } from "../components/Table_V9";
 import { useEffect, useState, useContext } from "react";
 
-import { ISort, ITableV9Column } from "../components/components/Table_V9/utils/Interface";
+import { ISort, ITableV9Column } from "../components/Table_V9/utils/Interface";
 import { IDataSourceBasic, OptionsLabel, dataSourceDummy } from "../data";
 
 import OptionContext from "../store/option-context";

@@ -29,18 +29,18 @@ export type FormFieldListType = {
   label: string;
   category: "default" | "custom";
   fieldType:
-    | "text"
-    | "number"
-    | "date"
-    | "datetime-local"
-    | "url"
-    | "email"
-    | "time"
-    | "tel"
-    | "date-range"
-    | "time-range"
-    | "datetime-range"
-    | "monetary";
+  | "text"
+  | "number"
+  | "date"
+  | "datetime-local"
+  | "url"
+  | "email"
+  | "time"
+  | "tel"
+  | "date-range"
+  | "time-range"
+  | "datetime-range"
+  | "monetary";
 };
 
 export type FormValueType = {
@@ -73,7 +73,7 @@ const FormDev: React.FC<FormComponentProps> = (props) => {
   const [isExpand, setIsExpand] = useState(true);
   const [isBulkEdit, setIsBulkEdit] = useState(false);
 
-  const [internalFieldList, setInternalFieldList] = useState<
+  const [internalFieldList] = useState<
     FormFieldListType[]
   >(props.fieldList);
   const [internalFormValue, setInternalFormValue] = useState<FormValueType>(

@@ -7,16 +7,16 @@ import {
   IColumn,
   IColumnDragDropDetails,
   IContextualMenuItem,
-  IDetailsColumnRenderTooltipProps, 
-  IDetailsHeaderProps, 
-  IDetailsRowProps, 
-  IconButton, 
-  Persona, 
-  PersonaSize, 
-  SelectionMode,  
-  Stack,  
-  Toggle,  
-  TooltipHost,  
+  IDetailsColumnRenderTooltipProps,
+  IDetailsHeaderProps,
+  IDetailsRowProps,
+  IconButton,
+  Persona,
+  PersonaSize,
+  SelectionMode,
+  Stack,
+  Toggle,
+  TooltipHost,
   initializeIcons,
 } from '@fluentui/react';
 import DetailsHeaderTooltip from './DetailsHeaderTooltip';
@@ -41,7 +41,7 @@ const Table: React.FunctionComponent<ITableProps> = props => {
     padding: "5px 0"
   };
 
-  const handleColumnClick = React.useCallback((event: React.MouseEvent<HTMLElement, MouseEvent>, column: IColumn) => {
+  const handleColumnClick = React.useCallback((_: any, column: IColumn) => {
     setSort(column.key);
 
     let newOrder: "desc" | "asc" = "desc";
@@ -68,7 +68,7 @@ const Table: React.FunctionComponent<ITableProps> = props => {
           case "boolean":
             return (
               <Stack key={column.key + index} horizontalAlign={column.data.textAlign ?? "start"}>
-                <FontIcon iconName={row[column.fieldName!] ? "Checkmark" : "Cancel"} style={row[column.fieldName!] ? {color: "green"} : {color: "red"}} />
+                <FontIcon iconName={row[column.fieldName!] ? "Checkmark" : "Cancel"} style={row[column.fieldName!] ? { color: "green" } : { color: "red" }} />
               </Stack>
             );
           case "array.string":
@@ -83,6 +83,7 @@ const Table: React.FunctionComponent<ITableProps> = props => {
             } else {
               return <Stack key={column.key + index} horizontalAlign={column.data.textAlign ?? "start"}>{moment(row[column.fieldName!]).format("DD MMM yyyy")}</Stack>
             }
+          // @ts-ignore
           case "array.persona":
             if (Array.isArray(row[column.fieldName!])) {
               return (
@@ -123,15 +124,15 @@ const Table: React.FunctionComponent<ITableProps> = props => {
   }
 
   const handleColumnSettingRender = (item: IContextualMenuItem) => {
-    const toggleStyles = {root: {margin: 0}};
-    
+    const toggleStyles = { root: { margin: 0 } };
+
     return (
       <Stack
         horizontal
         horizontalAlign="space-between"
         verticalAlign="center"
-        tokens={{childrenGap: "10px"}}
-        style={{padding: "8px 15px"}}
+        tokens={{ childrenGap: "10px" }}
+        style={{ padding: "8px 15px" }}
       >
         <div>{item.text}</div>
         <Toggle
@@ -140,7 +141,7 @@ const Table: React.FunctionComponent<ITableProps> = props => {
           checked={item.data.checked}
           styles={toggleStyles}
           onChange={(_, checked: boolean | undefined) => { props.onColumnToggle!(checked ?? true, item.data.column) }}
-          onClick={() => {console.log(" toggle clicked ")}}
+          onClick={() => { console.log(" toggle clicked ") }}
         />
       </Stack>
     )
@@ -156,7 +157,7 @@ const Table: React.FunctionComponent<ITableProps> = props => {
   }
 
   const handleRenderColumnHeaderTooltip = (tooltipProps: IDetailsColumnRenderTooltipProps | undefined) => {
-    return <DetailsHeaderTooltip tooltipProps={tooltipProps!}  />
+    return <DetailsHeaderTooltip tooltipProps={tooltipProps!} />
   }
 
   const handleColumnResize = (column: IColumn | undefined, newWidth: number | undefined) => {
@@ -181,39 +182,40 @@ const Table: React.FunctionComponent<ITableProps> = props => {
       let schemaProperty: any = schema.properties![column.fieldName];
 
       switch (schemaProperty.type) {
+        // @ts-ignore
         case "string":
           if (schemaProperty["format"]) {
-            if (schemaProperty["format"] === "date") return {cellType: "string.date", filterFieldType: "datepicker"};
-            else if (schemaProperty["format"] === "date-time") return {cellType: "string.date", filterFieldType: "datepicker"};
+            if (schemaProperty["format"] === "date") return { cellType: "string.date", filterFieldType: "datepicker" };
+            else if (schemaProperty["format"] === "date-time") return { cellType: "string.date", filterFieldType: "datepicker" };
           } else if (Array.isArray(schemaProperty["enum"]) && schemaProperty["enum"].length > 0) {
-            return {cellType: "string", filterFieldType: "select.string"};
+            return { cellType: "string", filterFieldType: "select.string" };
           } else {
-            return {cellType: "string", filterFieldType: "text"};
+            return { cellType: "string", filterFieldType: "text" };
           }
         case "number":
         case "integer":
-          return {cellType: "string", filterFieldType: "number"};
+          return { cellType: "string", filterFieldType: "number" };
         case "boolean":
-          return {cellType: "boolean", filterFieldType: "select.boolean"};
+          return { cellType: "boolean", filterFieldType: "select.boolean" };
         case "array":
           switch (schemaProperty.items?.type) {
-            case "string": 
+            case "string":
               if (schemaProperty["format"] && schemaProperty["format"] === "date") {
-                return {cellType: "array.date", filterFieldType: "datepicker"};
+                return { cellType: "array.date", filterFieldType: "datepicker" };
               } else if (Array.isArray(schemaProperty["enum"]) && schemaProperty["enum"].length > 0) {
-                return {cellType: "array.string", filterFieldType: "select.string"};
+                return { cellType: "array.string", filterFieldType: "select.string" };
               } else {
-                return {cellType: "array.string", filterFieldType: "text"};
+                return { cellType: "array.string", filterFieldType: "text" };
               }
             default:
               const typeRef: string | undefined = schemaProperty["items"]["$ref"];
               if (typeRef) {
                 const objectType: string = typeRef.split("/")[2];
 
-                if (objectType === "User") return {cellType: "array.persona", filterFieldType: "peoplepicker"};
-                else return {cellType: "array.string", filterFieldType: "peoplepicker"};
+                if (objectType === "User") return { cellType: "array.persona", filterFieldType: "peoplepicker" };
+                else return { cellType: "array.string", filterFieldType: "peoplepicker" };
               } else {
-                return {cellType: "array.string", filterFieldType: "text"};
+                return { cellType: "array.string", filterFieldType: "text" };
               }
           }
         default:
@@ -221,14 +223,14 @@ const Table: React.FunctionComponent<ITableProps> = props => {
           if (typeRef) {
             const objectType: string = typeRef.split("/")[2];
 
-            if (objectType === "User") return {cellType: "persona", filterFieldType: "peoplepicker"};
-            else return {cellType: "string", filterFieldType: "text"};
+            if (objectType === "User") return { cellType: "persona", filterFieldType: "peoplepicker" };
+            else return { cellType: "string", filterFieldType: "text" };
           } else {
-            return {cellType: "string", filterFieldType: "text"};
+            return { cellType: "string", filterFieldType: "text" };
           }
-      } 
+      }
     } else {
-      return {cellType: "string", filterFieldType: "text"};
+      return { cellType: "string", filterFieldType: "text" };
     }
   }
 
@@ -252,7 +254,7 @@ const Table: React.FunctionComponent<ITableProps> = props => {
             onSortClick: column.onSortClick,
             onFilterChange: column.onFilterChange,
             onRenderCell: column.onRenderCell,
-            renderType: props.schema ? getTypeFromSchema(column, props.schema) : {cellType: "string", filterFieldType: "text"},
+            renderType: props.schema ? getTypeFromSchema(column, props.schema) : { cellType: "string", filterFieldType: "text" },
             filterOptions: column.filterOptions,
             textAlign: column.textAlign
           },
@@ -268,7 +270,7 @@ const Table: React.FunctionComponent<ITableProps> = props => {
 
         processedColumns.push(processedColumn);
       }
-      
+
       if (props.onColumnToggle && column.toggleable) {
         processedColumnSettings.push({
           key: column.key,
@@ -287,7 +289,7 @@ const Table: React.FunctionComponent<ITableProps> = props => {
   }, [props.columns, sort, order]);
 
   return (
-    <div style={{position: "relative"}}>
+    <div style={{ position: "relative" }}>
       <DetailsList compact
         layoutMode={DetailsListLayoutMode.justified}
         selectionMode={SelectionMode.none}
@@ -297,17 +299,17 @@ const Table: React.FunctionComponent<ITableProps> = props => {
         onColumnResize={props.onColumnResize ? handleColumnResize : undefined}
         columnReorderOptions={
           props.onColumnDrop ?
-          { 
-            frozenColumnCountFromStart: 0,
-            frozenColumnCountFromEnd: 0,
-            onColumnDrop: handleColumnDrop
-          }
-          :
-          undefined
+            {
+              frozenColumnCountFromStart: 0,
+              frozenColumnCountFromEnd: 0,
+              onColumnDrop: handleColumnDrop
+            }
+            :
+            undefined
         }
         onRenderRow={props.onRowDoubleClick ? handleRenderRow : undefined}
       />
-      
+
       {columnSettings.length > 0 &&
         <div style={settingButtonStyle}>
           <IconButton
@@ -315,7 +317,7 @@ const Table: React.FunctionComponent<ITableProps> = props => {
               items: columnSettings,
               directionalHintFixed: true
             }}
-            iconProps={{iconName: "Settings"}}
+            iconProps={{ iconName: "Settings" }}
           />
         </div>
       }

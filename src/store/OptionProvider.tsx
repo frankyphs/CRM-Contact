@@ -1,7 +1,7 @@
 
 import { useReducer } from "react";
 import OptionContext from "./option-context";
-import { IOptionsDropdown, IOptionsPersona, IOptionsTag } from "../components/components/Field/utils/field.interface";
+import { IOptionsDropdown, IOptionsPersona, IOptionsTag } from "../components/Field/utils/field.interface";
 // import { IOptionsDropdown, IOptionsPersona, IOptionsTag } from "@kitameraki/teamswork-library/dist/components/Field/utils/field.interface";
 
 export interface OptionState {
@@ -68,6 +68,7 @@ const OptionProvider: React.FC<ProviderProps> = ({ children }) => {
   };
 
   return (
+    // @ts-ignore
     <OptionContext.Provider value={optionContext}>{children}</OptionContext.Provider>
   );
 };

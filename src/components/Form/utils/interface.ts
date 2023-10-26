@@ -1,10 +1,9 @@
-import { IDropdownOption } from "@fluentui/react"
-import { PresenceBadge, PresenceBadgeProps, PresenceBadgeStatus } from "@fluentui/react-components"
+import { PresenceBadgeStatus } from "@fluentui/react-components"
 
-enum labelPosition {
-  top = "Top",
-  left = "Left",
-}
+// enum labelPosition {
+//   top = "Top",
+//   left = "Left",
+// }
 
 export interface IFieldBaseProps<T = any> {
   // Style related props

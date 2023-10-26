@@ -1,6 +1,6 @@
 import React from "react";
 // import { IOptionsPersona, IOptionsDropdown, IOptionsTag } from "@kitameraki/teamswork-library/dist/components/Field/utils/field.interface";
-import { IOptionsDropdown, IOptionsPersona, IOptionsTag } from "../components/components/Field/utils/field.interface";
+import { IOptionsDropdown, IOptionsPersona, IOptionsTag } from "../components/Field/utils/field.interface";
 
 type ActionData = IOptionsDropdown[] | IOptionsPersona[] | IOptionsTag[];
 export interface Action<T> {

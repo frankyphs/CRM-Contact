@@ -1,7 +1,6 @@
 import { Text, Button } from "@fluentui/react-components"
 import { Building32Regular } from "@fluentui/react-icons"
-import DropdownField from "../components/components/Field/DropdownField/DropdownField"
-// import { DropdownField } from "@kitameraki/teamswork-library"
+import DropdownField from "../components/Field/DropdownField/DropdownField"
 
 const OrganizationDetail = () => {
   return (
