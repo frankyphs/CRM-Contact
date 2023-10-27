@@ -63,6 +63,13 @@ export const InputDropdown = (props: any) => {
     setNameValue([props.data])
   }, [props.data])
 
+  // if user delete an options on row 2, and the deleted options is on row 1, the row 1 automatically have undefined label
+  useEffect(() => {
+    if (!options.some(option => option.id === nameValue[0])) {
+      props.onChange("")
+    }
+  }, [options]);
+
   const handleNameChange = (newValue: any) => {
     setNameValue(newValue);
   };

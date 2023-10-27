@@ -50,7 +50,6 @@ export const InputDropdown = (props: any) => {
 
   useEffect(() => {
     setCancelData(props.data)
-    console.log(nameValue[0], "hihihihihi")
   }, [])
 
   useEffect(() => {
@@ -77,7 +76,6 @@ export const InputDropdown = (props: any) => {
     setNameValue([cancelData])
   }
   const handleOptionChange = (newValue: any) => {
-    // Menggunakan action ADD untuk menambahkan data ke options
     dispatchOption(addOptionAction(newValue));
   };
 
