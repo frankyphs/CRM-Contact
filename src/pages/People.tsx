@@ -103,7 +103,7 @@ const People = () => {
       key: "name",
       label: "Name",
       dataIndex: "name",
-      minWidth: 200,
+      minWidth: 250,
       compare: (a: IDataSourceBasic, b: IDataSourceBasic) => {
         return (a.name ?? "").localeCompare(b.name ?? "");
       },
@@ -129,7 +129,7 @@ const People = () => {
       key: "organization",
       label: "Organization",
       dataIndex: "organization",
-      minWidth: 200,
+      minWidth: 250,
       compare: (a: any, b: any) => {
         return a.organization.localeCompare(b.organization);
       },
@@ -140,7 +140,7 @@ const People = () => {
     {
       key: "email",
       label: "Email",
-      minWidth: 200,
+      minWidth: 250,
       dataIndex: "email",
       compare: (a: any, b: any) => {
         return a.email.localeCompare(b.email);
@@ -153,7 +153,8 @@ const People = () => {
       key: "phone",
       label: "Phone",
       dataIndex: "phone",
-      width: 200,
+      minWidth: 250,
+      width: 250,
       compare: (a: any, b: any) => {
         return a.phone.localeCompare(b.phone);
       },
@@ -223,7 +224,7 @@ const People = () => {
           <TableV9
             columns={columns}
             dataSource={dataSource}
-            resizable={false}
+            resizable={true}
             sort={sort}
             onSortChange={onSortChange}
             reorderColumnEnabled={true}

@@ -201,7 +201,7 @@ const Organizations = () => {
           </div>
         </div>
 
-        <div style={{ width: "100%", overflowX: "auto" }}>
+        <div style={{ width: "100%", overflowX: "clip" }}>
           <TableV9
             columns={columns}
             dataSource={dataSource}
