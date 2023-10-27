@@ -5,6 +5,8 @@ export interface IDataSourceBasic {
   email?: string
   phone?: string
   label?: string
+  address?: string
+  people?: string
   [key: string]: string | undefined;
 }
 
@@ -83,6 +85,37 @@ export const dataSourceDummy: IDataSourceBasic[] = [
     email: "cab@gmail.com",
     phone: "5555-8888",
     label: "6"
+  },
+];
+
+export const dataSourceDummyOrganization: IDataSourceBasic[] = [
+  {
+    id: "1",
+    address: "Jalan Alpha",
+    organization: "PT.Alpha",
+    people: "10",
+    label: "3"
+  },
+  {
+    id: "2",
+    address: "Jalan Gama",
+    organization: "PT.BBB",
+    people: "11",
+    label: "2"
+  },
+  {
+    id: "3",
+    address: "Jalan Beta",
+    organization: "LTD.ZZZ",
+    people: "9",
+    label: "5"
+  },
+  {
+    id: "4",
+    address: "Jalan Charli",
+    organization: "CV.YYY",
+    people: "8",
+    label: "4"
   },
 ];
 

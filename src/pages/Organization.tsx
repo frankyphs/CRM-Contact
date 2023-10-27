@@ -8,6 +8,7 @@ import { ISort, ITableV9Column } from "../components/Table_V9/utils/Interface";
 import { IOptionsDropdown, IOptionsPersona, IOptionsTag } from "../components/Field/utils/field.interface";
 import { OptionsLabel } from "../data";
 import { IDataSourceBasic } from "../data";
+import { dataSourceDummyOrganization } from "../data";
 
 export const tesOptions = [
   { id: "1", label: "religion", data: { color: "#FFF3DA" } },
@@ -18,37 +19,6 @@ export const tesOptions = [
   { id: "6", label: "technology", data: { color: "#FF6969" } },
   { id: "7", label: "economy", data: { color: "#EE9322" } },
   { id: "8", label: "criminal" },
-];
-
-export const dataSourceDummy: IDataSourceBasic[] = [
-  {
-    id: "1",
-    address: "Jalan Alpha",
-    organization: "PT.Alpha",
-    people: "10",
-    label: "3"
-  },
-  {
-    id: "2",
-    address: "Jalan Gama",
-    organization: "PT.BBB",
-    people: "11",
-    label: "2"
-  },
-  {
-    id: "3",
-    address: "Jalan Beta",
-    organization: "LTD.ZZZ",
-    people: "9",
-    label: "5"
-  },
-  {
-    id: "4",
-    address: "Jalan Charli",
-    organization: "CV.YYY",
-    people: "8",
-    label: "4"
-  },
 ];
 
 export const InputName = (props: any) => {
@@ -175,7 +145,7 @@ const Organizations = () => {
   ];
 
   const [columns, setColumns] = useState<ITableV9Column[]>(columnsOfPeople);
-  const [dataSource, setDataSource] = useState<IDataSourceBasic[]>(dataSourceDummy);
+  const [dataSource, setDataSource] = useState<IDataSourceBasic[]>(dataSourceDummyOrganization);
   const [sort, setSort] = useState<ISort>({
     sortDirection: "ascending",
     sortColumn: "name",
