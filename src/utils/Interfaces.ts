@@ -161,6 +161,7 @@ export interface IValueComponent {
   onChange: (newValue: string) => void
   onClickNavRouter?: boolean
   type: "number" | "time" | "text" | "date" | "datetime-local" | "url" | "email" | "tel" | undefined
+  typeInput?: "people" | "organization"
 }
 
 export interface IValueDropdown {

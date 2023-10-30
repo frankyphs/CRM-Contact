@@ -21,6 +21,7 @@ export const InputText = (props: IValueComponent) => {
 
   const handleSave = (newValue: string) => {
     props.onChange(newValue)
+    setCancelData(newValue)
   }
 
   const handleCancel = () => {
@@ -30,7 +31,7 @@ export const InputText = (props: IValueComponent) => {
   return (
     <>
       <div style={{ position: "relative" }}>
-        {props.onClickNavRouter ? (
+        {props.onClickNavRouter && props.typeInput === "people" ? (
           <NavLink
             to="/people_detail"
             style={{
@@ -42,7 +43,22 @@ export const InputText = (props: IValueComponent) => {
               zIndex: "10",
             }}
           ></NavLink>
-        ) : null}
+        ) :
+          props.onClickNavRouter && props.typeInput === "organization" ? (
+            <NavLink
+              to="/organization_detail"
+              style={{
+                marginTop: "5px",
+                backgroundColor: "transparent",
+                position: "absolute",
+                width: "110px",
+                height: "32px",
+                zIndex: "10",
+              }}
+            ></NavLink>
+          ) :
+
+            null}
         <InputField type={props.type} value={value} onChange={handleNameChange} onSave={handleSave} onCancel={handleCancel} />
       </div>
     </>

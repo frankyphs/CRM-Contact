@@ -1,8 +1,7 @@
-
 import { useReducer } from "react";
 import OptionContext from "./option-context";
 import { IOptionsDropdown, IOptionsPersona, IOptionsTag } from "../components/Field/utils/field.interface";
-// import { IOptionsDropdown, IOptionsPersona, IOptionsTag } from "@kitameraki/teamswork-library/dist/components/Field/utils/field.interface";
+import { defaultOption } from "../data";
 
 export interface OptionState {
   options: IOptionsDropdown[] | IOptionsPersona[] | IOptionsTag[]
@@ -17,20 +16,7 @@ export interface ProviderProps {
   children: React.ReactNode;
 }
 
-const defaultOptionState = {
-  options: [
-    { id: "1", label: "religion", data: { color: "#FFF3DA" } },
-    { id: "2", label: "education", data: { color: "#DFCCFB" } },
-    { id: "3", label: "politic" },
-    { id: "4", label: "social", data: { color: "#BC7AF9" } },
-    { id: "5", label: "heritage" },
-    { id: "6", label: "technology", data: { color: "#FF6969" } },
-    { id: "7", label: "economy", data: { color: "#EE9322" } },
-    { id: "8", label: "criminal" },
-  ],
-};
-
-
+const defaultOptionState = { options: defaultOption }
 
 const optionReducer: React.Reducer<OptionState, Action<IOptionsDropdown[] | IOptionsPersona[] | IOptionsTag[]>> = (
   state: OptionState = defaultOptionState,
@@ -68,7 +54,6 @@ const OptionProvider: React.FC<ProviderProps> = ({ children }) => {
   };
 
   return (
-    // @ts-ignore
     <OptionContext.Provider value={optionContext}>{children}</OptionContext.Provider>
   );
 };

@@ -10,7 +10,50 @@ export interface IDataSourceBasic {
   [key: string]: string | undefined;
 }
 
-export const dataSourceDummy: IDataSourceBasic[] = [
+export const defaultOption = [
+  { id: "1", label: "religion", data: { color: "#FFF3DA" } },
+  { id: "2", label: "education", data: { color: "#DFCCFB" } },
+  { id: "3", label: "politic" },
+  { id: "4", label: "social", data: { color: "#BC7AF9" } },
+  { id: "5", label: "heritage" },
+  { id: "6", label: "technology", data: { color: "#FF6969" } },
+  { id: "7", label: "economy", data: { color: "#EE9322" } },
+  { id: "8", label: "criminal" },
+]
+
+export const defaultOrganization = [
+  {
+    id: "1",
+    address: "Jalan Alpha",
+    organization: "PT.Alpha",
+    people: "10",
+    label: "3"
+  },
+  {
+    id: "2",
+    address: "Jalan Gama",
+    organization: "PT.BBB",
+    people: "11",
+    label: "2"
+  },
+  {
+    id: "3",
+    address: "Jalan Beta",
+    organization: "LTD.ZZZ",
+    people: "9",
+    label: "5"
+  },
+  {
+    id: "4",
+    address: "Jalan Charli",
+    organization: "CV.YYY",
+    people: "8",
+    label: "4"
+  },
+]
+
+export const defaultPeople = [
+
   {
     id: "1",
     name: "Alpha",
@@ -75,99 +118,10 @@ export const dataSourceDummy: IDataSourceBasic[] = [
     phone: "5555-8888",
     label: "6"
   },
-];
-
-export const dataSourceDummyOrganization: IDataSourceBasic[] = [
-  {
-    id: "1",
-    address: "Jalan Alpha",
-    organization: "PT.Alpha",
-    people: "10",
-    label: "3"
-  },
-  {
-    id: "2",
-    address: "Jalan Gama",
-    organization: "PT.BBB",
-    people: "11",
-    label: "2"
-  },
-  {
-    id: "3",
-    address: "Jalan Beta",
-    organization: "LTD.ZZZ",
-    people: "9",
-    label: "5"
-  },
-  {
-    id: "4",
-    address: "Jalan Charli",
-    organization: "CV.YYY",
-    people: "8",
-    label: "4"
-  },
-];
+]
 
 
 
-// export const TableComponent = (props: any) => {
-//   const [nameValue, setNameValue] = useState(props.data.name);
 
-//   const handleNameChange = (newValue: string) => {
-//     setNameValue(newValue);
-//     props.onChange(newValue);
-//   };
-
-//   return (
-//     <div style={{ position: "relative" }}>
-//       <NavLink
-//         to="/people_detail"
-//         style={{
-//           marginTop: "5px",
-//           backgroundColor: "transparent",
-//           position: "absolute",
-//           width: "110px",
-//           height: "32px",
-//           zIndex: "10"
-//         }}
-//       >
-//       </NavLink>
-//       <InputField value={nameValue} onChange={handleNameChange} />
-//     </div>
-//   );
-// };
-
-
-// export const InputNameFix = (props: any) => {
-//   const [nameValue, setNameValue] = useState(props.data)
-
-//   const handleNameChange = (newValue: any) => {
-//     setNameValue(newValue);
-//   };
-
-//   return (
-//     <div style={{ position: "relative" }}><NavLink to="/people_detail" style={{ marginTop: "5px", backgroundColor: "transparent", position: "absolute", width: "110px", height: "32px", zIndex: "10" }}>
-//     </NavLink><InputField value={nameValue} onChange={handleNameChange} /></div>
-//   )
-// }
-
-
-// const YourComponent = () => {
-//   const [dataSource, setDataSource] = useState(dataSourceDummy);
-
-//   const handleNameChange = (name:any, newValue:any) => {
-//     const updatedDataSource = dataSource.map((data) => {
-//       if (data.name === name) {
-//         return { ...data, nameValue: newValue };
-//       }
-//       return data;
-//     });
-//     setDataSource(updatedDataSource);
-//   };
-
-//   return (
-
-//   );
-// };
 
 

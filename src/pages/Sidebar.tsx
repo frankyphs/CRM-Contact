@@ -75,18 +75,6 @@ export const Sidebar = (props: any) => {
               </div>
             )}
           </NavLink></Tab>
-
-
-          {/* <Tab value="tab1" > <NavLink to="/">
-            {({ isActive }) => (
-              <Button icon={<Person28Regular />} className={isActive ? classes.root : classesInactive.root}>People</Button>
-            )}
-          </NavLink></Tab>
-          <Tab value="tab2">    <NavLink to="/organizations" className="nav-link">
-            {({ isActive }) => (
-              <Button icon={<Building32Regular />} className={isActive ? classes.root : classesInactive.root}>Organizations</Button>
-            )}
-          </NavLink></Tab> */}
         </TabList>
       </div>
     </div>
