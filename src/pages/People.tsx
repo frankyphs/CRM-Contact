@@ -4,6 +4,7 @@ import InputField from "../components/Field/InputField/InputField";
 import DropdownField from "../components/Field/DropdownField/DropdownField";
 import { TableV9 } from "../components/Table_V9";
 import { useEffect, useState, useContext } from "react";
+import { NavLink } from "react-router-dom";
 
 import { ISort, ITableV9Column } from "../components/Table_V9/utils/Interface";
 import { IDataSourceBasic, OptionsLabel, dataSourceDummy } from "../data";
@@ -37,7 +38,24 @@ export const InputName = (props: any) => {
   }
 
   return (
-    <InputField type={props.type} value={nameValue} onChange={handleNameChange} onSave={handleSave} onCancel={handleCancel} />
+    <>
+      <div style={{ position: "relative" }}>
+        {props.onClickNavRouter ? (
+          <NavLink
+            to="/people_detail"
+            style={{
+              marginTop: "5px",
+              backgroundColor: "transparent",
+              position: "absolute",
+              width: "110px",
+              height: "32px",
+              zIndex: "10",
+            }}
+          ></NavLink>
+        ) : null}
+        <InputField type={props.type} value={nameValue} onChange={handleNameChange} onSave={handleSave} onCancel={handleCancel} />
+      </div>
+    </>
   )
 }
 
@@ -108,7 +126,7 @@ const People = () => {
         return (a.name ?? "").localeCompare(b.name ?? "");
       },
       onRenderDataSource: (data: IDataSourceBasic) => {
-        return <InputName data={data.name} onChange={(newName: string) => handleDataChange(data.id, "name", newName)} type="text" />;
+        return <InputName data={data.name} onChange={(newName: string) => handleDataChange(data.id, "name", newName)} type="text" onClickNavRouter={true} />;
       },
     },
     {

@@ -9,6 +9,7 @@ import { IOptionsDropdown, IOptionsPersona, IOptionsTag } from "../components/Fi
 import { OptionsLabel } from "../data";
 import { IDataSourceBasic } from "../data";
 import { dataSourceDummyOrganization } from "../data";
+import { NavLink } from "react-router-dom";
 
 export const tesOptions = [
   { id: "1", label: "religion", data: { color: "#FFF3DA" } },
@@ -46,7 +47,24 @@ export const InputName = (props: any) => {
   }
 
   return (
-    <InputField type={props.type} value={nameValue} onChange={handleNameChange} onSave={handleSave} onCancel={handleCancel} />
+    <>
+      <div style={{ position: "relative" }}>
+        {props.onClickNavRouter ? (
+          <NavLink
+            to="/organization_detail"
+            style={{
+              marginTop: "5px",
+              backgroundColor: "transparent",
+              position: "absolute",
+              width: "110px",
+              height: "32px",
+              zIndex: "10"
+            }}
+          ></NavLink>
+        ) : null}
+        <InputField type={props.type} value={nameValue} onChange={handleNameChange} onSave={handleSave} onCancel={handleCancel} />
+      </div>
+    </>
   )
 }
 
@@ -108,7 +126,7 @@ const Organizations = () => {
         return (a.organization ?? "").localeCompare(b.organization ?? "");
       },
       onRenderDataSource: (data: IDataSourceBasic) => {
-        return <InputName data={data.organization} onChange={(newName: string) => handleDataChange(data.id, "organization", newName)} type="text" />;
+        return <InputName data={data.organization} onChange={(newName: string) => handleDataChange(data.id, "organization", newName)} type="text" onClickNavRouter={true} />;
       },
     },
     {
