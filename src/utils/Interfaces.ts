@@ -154,3 +154,17 @@ export interface IUser {
    */
   email: string
 }
+
+
+export interface IValueComponent {
+  data: string
+  onChange: (newValue: string) => void
+  onClickNavRouter?: boolean
+  type: "number" | "time" | "text" | "date" | "datetime-local" | "url" | "email" | "tel" | undefined
+}
+
+export interface IValueDropdown {
+  data: string
+  onChange: (newValue: string) => void
+  type: "tags" | "persona" | "dropdown"
+}

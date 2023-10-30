@@ -10,17 +10,6 @@ export interface IDataSourceBasic {
   [key: string]: string | undefined;
 }
 
-export const OptionsLabel = [
-  { id: "1", label: "religion", data: { color: "#FFF3DA" } },
-  { id: "2", label: "education", data: { color: "#DFCCFB" } },
-  { id: "3", label: "politic" },
-  { id: "4", label: "social", data: { color: "#BC7AF9" } },
-  { id: "5", label: "heritage" },
-  { id: "6", label: "technology", data: { color: "#FF6969" } },
-  { id: "7", label: "economy", data: { color: "#EE9322" } },
-  { id: "8", label: "criminal" },
-];
-
 export const dataSourceDummy: IDataSourceBasic[] = [
   {
     id: "1",
