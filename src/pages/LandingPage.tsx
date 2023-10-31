@@ -15,19 +15,23 @@ function LandingPage() {
     <>
       <div style={{ display: "flex" }}>
         <NavigationLayout content={
-          <ContentLayout header={<div style={{ display: "flex", gap: "10px", alignItems: "center", marginLeft: "20px" }}>
-            <Button icon={!isOpen ?
-              <CaretRight24Regular />
-              : <CaretLeft24Regular />} style={{ padding: "0 0", width: "40px", height: "30px" }} onClick={() => setIsOpen(!isOpen)}>
-            </Button>
-            <Text weight="bold">Contacts/People</Text>
-          </div>}
-            main={<div style={{ display: "flex" }}>
-              <Sidebar isOpen={isOpen} />
-              <div style={{ flex: "1", overflow: "auto" }}>
-                <Outlet />
+          <ContentLayout
+            header={<div style={{ display: "flex", gap: "10px", alignItems: "center", marginLeft: "20px" }}>
+              <Button icon={!isOpen ?
+                <CaretRight24Regular />
+                : <CaretLeft24Regular />} style={{ padding: "0 0", width: "40px", height: "30px" }} onClick={() => setIsOpen(!isOpen)}>
+              </Button>
+              <Text weight="bold">Contacts/People</Text>
+            </div>}
+            main={
+              <div style={{ display: "flex", height: "100%" }}>
+                <Sidebar isOpen={isOpen} />
+                <div style={{ flex: "1", overflow: "auto" }}>
+                  <Outlet />
+                </div>
               </div>
-            </div>} />} />
+            }
+          />} />
 
       </div>
     </>

@@ -27,10 +27,10 @@ const activeStyle = makeStyles({
 });
 
 
-
 export const Sidebar = (props: any) => {
   const styles = useStyles();
   const styleActive = activeStyle()
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div className={styles.root} style={!props.isOpen ? { display: "none" } : { display: "block" }}>
