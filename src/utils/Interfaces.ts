@@ -162,6 +162,7 @@ export interface IValueComponent {
   onClickNavRouter?: boolean
   type: "number" | "time" | "text" | "date" | "datetime-local" | "url" | "email" | "tel" | undefined
   typeInput?: "people" | "organization"
+  id?: string
 }
 
 export interface IValueDropdown {

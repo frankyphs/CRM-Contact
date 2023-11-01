@@ -1,14 +1,14 @@
 import React from "react";
-import { IDataSourceBasic } from "../data";
-type ActionData = IDataSourceBasic[]
+import { IDataSourcePeople } from "../data";
+type ActionData = IDataSourcePeople[]
 export interface Action<T> {
   type: string;
   data: T
 }
 
 interface IDataContext {
-  data: IDataSourceBasic[]
-  dispatchData: React.Dispatch<Action<IDataSourceBasic[]>>;
+  data: IDataSourcePeople[]
+  dispatchData: React.Dispatch<Action<IDataSourcePeople[]>>;
 }
 
 const DataContext = React.createContext<IDataContext>({

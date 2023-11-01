@@ -32,7 +32,7 @@ export const Sidebar = (props: any) => {
   const styleActive = activeStyle()
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", flexDirection: "column", backgroundColor: "#fff" }}>
       <div className={styles.root} style={!props.isOpen ? { display: "none" } : { display: "block" }}>
         <TabList vertical>
           <Tab value="tab1">

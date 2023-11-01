@@ -1,9 +1,9 @@
 import { useReducer } from "react";
 import DataContext from "./people-context";
-import { IDataSourceBasic, defaultPeople } from "../data";
+import { IDataSourcePeople } from "../data";
 
 export interface DataState {
-  data: IDataSourceBasic[]
+  data: IDataSourcePeople[]
 }
 
 export interface Action<T> {
@@ -16,12 +16,13 @@ export interface ProviderProps {
 }
 
 const defaultDataState = {
-  data: defaultPeople
+  data: []
+  // defaultPeople
 };
 
-const dataReducer: React.Reducer<DataState, Action<IDataSourceBasic[]>> = (
+const dataReducer: React.Reducer<DataState, Action<IDataSourcePeople[]>> = (
   state: DataState = defaultDataState,
-  action: Action<IDataSourceBasic[]>
+  action: Action<IDataSourcePeople[]>
 ): DataState => {
   if (action.type === "GET") {
     return {
@@ -38,7 +39,7 @@ const dataReducer: React.Reducer<DataState, Action<IDataSourceBasic[]>> = (
   return defaultDataState;
 };
 
-export const addDataAction = (data: IDataSourceBasic[]) => ({
+export const addDataAction = (data: IDataSourcePeople[]) => ({
   type: "ADD",
   data,
 });

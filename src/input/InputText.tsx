@@ -33,7 +33,7 @@ export const InputText = (props: IValueComponent) => {
       <div style={{ position: "relative" }}>
         {props.onClickNavRouter && props.typeInput === "people" ? (
           <NavLink
-            to="/people_detail"
+            to={`/people_detail/${props.id}`}
             style={{
               marginTop: "5px",
               backgroundColor: "transparent",

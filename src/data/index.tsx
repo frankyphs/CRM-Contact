@@ -10,6 +10,48 @@ export interface IDataSourceBasic {
   [key: string]: string | undefined;
 }
 
+export type KeyValuePair = {
+  [x: string]: any;
+};
+
+export type Contact = {
+  label: string;
+  value: string;
+  primary: boolean;
+};
+
+export type IDataSourceOrganization = {
+  id: string,
+  name: string,
+  address: string,
+  createdOn: string,
+  updatedOn: string,
+  ownerId: string,
+  creatorId: string,
+  tenantId: string,
+  instanceId: string,
+  customFields: {
+    // officeName-id: string
+  }
+}
+
+export type IDataSourcePeople = {
+  id: string;
+  phone: Contact[];
+  email: Contact[];
+  firstName: string;
+  lastName: string;
+  createdOn: string;
+  updatedOn: string;
+  ownerId: string;
+  creatorId: string;
+  organizationId?: string;
+  instanceId?: string;
+  tenantId: string;
+  customFields: KeyValuePair;
+  organization: IDataSourceOrganization;
+};
+
 export const defaultOption = [
   { id: "1", label: "religion", data: { color: "#FFF3DA" } },
   { id: "2", label: "education", data: { color: "#DFCCFB" } },

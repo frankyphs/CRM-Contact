@@ -1,7 +1,7 @@
 import React from "react";
-import { IDataSourceBasic } from "../data";
+import { IDataSourceOrganization } from "../data";
 
-type ActionData = IDataSourceBasic[]
+type ActionData = IDataSourceOrganization[]
 
 export interface Action<T> {
   type: string;
@@ -9,8 +9,8 @@ export interface Action<T> {
 }
 
 interface IOrganizationContext {
-  organization: IDataSourceBasic[]
-  dispatchOrganization: React.Dispatch<Action<IDataSourceBasic[]>>;
+  organization: IDataSourceOrganization[]
+  dispatchOrganization: React.Dispatch<Action<IDataSourceOrganization[]>>;
 }
 
 const OrganizationContext = React.createContext<IOrganizationContext>({

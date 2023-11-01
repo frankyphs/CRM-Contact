@@ -1,10 +1,9 @@
 import { useReducer } from "react";
 import OrganizationContext from "./organization-context";
-import { IDataSourceBasic } from "../data";
-import { defaultOrganization } from "../data";
+import { IDataSourceOrganization } from "../data";
 
 export interface OrganizationState {
-  organization: IDataSourceBasic[]
+  organization: IDataSourceOrganization[]
 }
 
 export interface Action<T> {
@@ -17,12 +16,12 @@ export interface ProviderProps {
 }
 
 const defaultOrganizationState = {
-  organization: defaultOrganization
+  organization: []
 };
 
-const organizationReducer: React.Reducer<OrganizationState, Action<IDataSourceBasic[]>> = (
+const organizationReducer: React.Reducer<OrganizationState, Action<IDataSourceOrganization[]>> = (
   state: OrganizationState = defaultOrganizationState,
-  action: Action<IDataSourceBasic[]>
+  action: Action<IDataSourceOrganization[]>
 ): OrganizationState => {
   if (action.type === "GET") {
     return {
@@ -39,7 +38,7 @@ const organizationReducer: React.Reducer<OrganizationState, Action<IDataSourceBa
   return defaultOrganizationState;
 };
 
-export const addOrganizationAction = (data: IDataSourceBasic[]) => ({
+export const addOrganizationAction = (data: IDataSourceOrganization[]) => ({
   type: "ADD",
   data,
 });

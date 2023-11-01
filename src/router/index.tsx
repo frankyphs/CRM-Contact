@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import LandingPage from "../pages/LandingPage";
+// import LandingPage from "../pages/LandingPage";
 import People from "../pages/People";
 import Organizations from "../pages/Organization";
 import PeopleDetail from "../pages/PeopleDetail";
 import OrganizationDetail from "../pages/OrganizationDetail";
-
+import DataPeople from "../services";
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <LandingPage />,
+    element: <DataPeople />,
     children: [
       {
         path: "/",
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         element: <Organizations />,
       },
       {
-        path: "/people_detail",
+        path: `/people_detail/:id`,
         element: <PeopleDetail />,
       },
       {

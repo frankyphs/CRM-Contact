@@ -26,7 +26,7 @@ function LandingPage() {
             main={
               <div style={{ display: "flex", height: "100%" }}>
                 <Sidebar isOpen={isOpen} />
-                <div style={{ flex: "1", overflow: "auto" }}>
+                <div style={{ flex: "1", overflow: "auto", backgroundColor: "#fff" }}>
                   <Outlet />
                 </div>
               </div>

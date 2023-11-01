@@ -1,23 +1,40 @@
-import { Button } from "@fluentui/react-components"
+import {
+  Button, Dialog,
+  DialogTrigger,
+  DialogSurface,
+  DialogTitle,
+  DialogBody,
+  DialogActions,
+  DialogContent,
+} from "@fluentui/react-components"
+import { useEffect } from "react"
 import { Add16Filled } from "@fluentui/react-icons"
 import { TableV9 } from "../components/Table_V9";
 import { useState, useContext } from "react";
 import { ISort, ITableV9Column } from "../components/Table_V9/utils/Interface";
 import OrganizationContext from "../store/organization-context";
-import { addOrganizationAction } from "../store/OrganizationProvider";
 import { getColumnsOfOrganization } from "./ColumnConfig";
+import Form from "../components/Form/Form";
+import { patchOrganization } from "../services";
+import { IDataSourceOrganization } from "../data";
 
 
 function useHandleDataChange() {
   const organizationContext = useContext(OrganizationContext)
-  const { organization, dispatchOrganization } = organizationContext
+  const { organization } = organizationContext
+  const [datum, setDatum] = useState<IDataSourceOrganization[]>()
+  useEffect(() => {
+    setDatum(organization)
+  }, [organization])
 
   return (id: string, key: string, newValue: string) => {
-    const dataIndex = organization.findIndex((item) => item.id === id);
+    console.log(id, key, newValue)
+    const dataIndex = datum?.findIndex((item) => item.id === id);
     if (dataIndex !== -1) {
-      const updatedDataSource = [...organization];
-      updatedDataSource[dataIndex][key] = newValue;
-      dispatchOrganization(addOrganizationAction(updatedDataSource))
+      let dataUpdated = {
+        [key]: newValue
+      };
+      patchOrganization(dataUpdated, id)
     }
   }
 }
@@ -28,8 +45,11 @@ const Organizations = () => {
   const columnsOfOrganization = getColumnsOfOrganization(handleDataChange)
 
   const [columns, setColumns] = useState<ITableV9Column[]>(columnsOfOrganization);
-  const dataContext = useContext(OrganizationContext)
-  const { organization } = dataContext
+  const organizationContext = useContext(OrganizationContext)
+  const { organization } = organizationContext
+  // const optionContext = useContext(OptionContext)
+  // const { options } = optionContext
+
 
   // sort-table
   const [sort, setSort] = useState<ISort>({
@@ -67,9 +87,69 @@ const Organizations = () => {
     <>
       <div style={{ padding: "20px 40px" }}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
-            <Button appearance="primary" icon={<Add16Filled />}>Person</Button>
-          </div>
+          <Dialog>
+            <DialogTrigger disableButtonEnhancement>
+              <Button appearance="primary" icon={<Add16Filled />}>Organization</Button>
+            </DialogTrigger>
+            <DialogSurface>
+              <DialogBody>
+                <DialogTitle>Add People</DialogTitle>
+                <DialogContent>
+                  <Form
+                    formLabel="Details"
+                    fieldList={
+                      [
+                        {
+                          id: "organization",
+                          label: "Name",
+                          type: "text",
+                          category: "default"
+                        },
+                        {
+                          id: "address",
+                          label: "Address",
+                          type: "text",
+                          category: "default"
+                        },
+                        {
+                          id: "label",
+                          label: "Tag",
+                          type: "tags",
+                          category: "default"
+                        },
+                        {
+                          id: "people",
+                          label: "People",
+                          type: "text",
+                          category: "default"
+                        },
+                        {
+                          id: "phone",
+                          label: "Phone",
+                          type: "tel",
+                          category: "default"
+                        },
+                      ]
+                    }
+                    defaultValue={
+                      {
+                        customField: {
+                          // customName: "Kitameraki"
+                        },
+
+                      }
+                    }
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <DialogTrigger disableButtonEnhancement>
+                    <Button appearance="secondary">Cancel</Button>
+                  </DialogTrigger>
+                  <Button appearance="primary">Save</Button>
+                </DialogActions>
+              </DialogBody>
+            </DialogSurface>
+          </Dialog>
         </div>
 
         <div style={{ width: "100%", overflowX: "auto" }}>
@@ -77,16 +157,16 @@ const Organizations = () => {
             columns={columns}
             dataSource={organization}
             resizable={false}
+            loading={organization.length > 0 ? false : true}
             sort={sort}
             onSortChange={onSortChange}
             reorderColumnEnabled={true}
-            menuShowColumnEnabled={true}
-            menuAddColumnEnabled={true}
+            menuShowColumnEnabled={organization.length > 0 ? true : false}
             onReorderColumn={onReorderColumn}
             onShowHideColumn={onShowHideColumn}
             groupBy={groupBy}
             onGroupByChange={onGroupByChange}
-            menuGroupDataSourceEnabled={true}
+            menuGroupDataSourceEnabled={organization.length > 0 ? true : false}
           />
         </div>
       </div>
