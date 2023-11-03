@@ -58,17 +58,17 @@ export const getColumnsOfPeople = (handleDataChange: IDataChange) => ([
       return (a.email?.[0]?.value || "").localeCompare(b.email?.[0]?.value || "");
     },
     onRenderDataSource: (data: IDataSourcePeople) => {
-      if (data.email?.[0]?.value !== undefined) {
-        return (
-          <InputText
-            data={data.email?.[0]?.value}
-            onChange={(newEmail: string) => handleDataChange(data.id, "email", newEmail)}
-            type="email"
-          />
-        );
-      } else {
-        return null;
-      }
+      // if (data.email?.[0]?.value !== undefined) {
+      return (
+        <InputText
+          data={data.email?.[0]?.value}
+          onChange={(newEmail: string) => handleDataChange(data.id, "email", newEmail)}
+          type="email"
+        />
+      );
+      // } else {
+      //   return null;
+      // }
     },
   },
   {
