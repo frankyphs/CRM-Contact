@@ -19,7 +19,7 @@ import {
 } from "../CommonComponents/utils/commonComponents.interface"
 import InactiveReadView from "../CommonComponents/InactiveReadView"
 import { useMemo, useRef, useState } from "react"
-import "./utils/MonetaryField.styles.css"
+// import "./utils/MonetaryField.styles.css"
 import { CurrencyObjectType, MonetaryFieldProps, MonetaryValueType } from "./utils/monetaryField.interface"
 import { formatCurrency } from "./utils/monetaryField.helper"
 import { currencyList } from "./utils/currencyList"
