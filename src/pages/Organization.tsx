@@ -17,7 +17,8 @@ import { getColumnsOfOrganization } from "./ColumnConfig";
 import Form from "../components/Form/Form";
 import { patchOrganization } from "../services";
 import { IDataSourceOrganization } from "../data";
-
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+import axios, { AxiosResponse } from "axios";
 
 function useHandleDataChange() {
   const organizationContext = useContext(OrganizationContext)
@@ -28,7 +29,6 @@ function useHandleDataChange() {
   }, [organization])
 
   return (id: string, key: string, newValue: string) => {
-    console.log(id, key, newValue)
     const dataIndex = datum?.findIndex((item) => item.id === id);
     if (dataIndex !== -1) {
       let dataUpdated = {
@@ -47,9 +47,34 @@ const Organizations = () => {
   const [columns, setColumns] = useState<ITableV9Column[]>(columnsOfOrganization);
   const organizationContext = useContext(OrganizationContext)
   const { organization } = organizationContext
-  // const optionContext = useContext(OptionContext)
-  // const { options } = optionContext
 
+  const { dispatchOrganization } = useContext(OrganizationContext)
+
+  useEffect(() => {
+    const fetchDataOrganization = async (): Promise<void> => {
+      try {
+        const config = {
+          headers: {
+            'tenantId': '8bb615ce-bd25-4700-a683-72d23daeb44d'
+          }
+        };
+
+        const response: AxiosResponse<any> = await axios.get(
+          `${baseUrl}/api/v1/organizations`,
+          config
+        );
+
+        if (response.status !== 200) {
+          throw new Error("Error fetching template");
+        }
+        const jsonData: any = await response.data.data;
+        dispatchOrganization({ type: "GET", data: jsonData });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDataOrganization()
+  }, [])
 
   // sort-table
   const [sort, setSort] = useState<ISort>({
@@ -59,7 +84,7 @@ const Organizations = () => {
 
   // group-table
   const [groupBy, setGroupBy] = useState("");
-  const onGroupByChange = (newGroupBy?: string) => {
+  const onGroupByChange = (_?: string, newGroupBy?: string) => {
     newGroupBy && setGroupBy(newGroupBy);
   };
 

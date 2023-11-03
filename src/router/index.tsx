@@ -5,11 +5,13 @@ import Organizations from "../pages/Organization";
 import PeopleDetail from "../pages/PeopleDetail";
 import OrganizationDetail from "../pages/OrganizationDetail";
 import DataPeople from "../services";
+import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "",
     element: <DataPeople />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -24,7 +26,7 @@ const router = createBrowserRouter([
         element: <PeopleDetail />,
       },
       {
-        path: "/organization_detail",
+        path: "/organization_detail/:id",
         element: <OrganizationDetail />,
       },
     ],

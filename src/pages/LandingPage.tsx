@@ -32,7 +32,6 @@ function LandingPage() {
               </div>
             }
           />} />
-
       </div>
     </>
   );

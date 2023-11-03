@@ -16,6 +16,9 @@ import { getColumnsOfPeople } from "./ColumnConfig";
 import Form from "../components/Form/Form";
 import { patchPeople } from "../services";
 import { IDataSourcePeople } from "../data";
+const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+import axios, { AxiosResponse } from "axios";
+import OrganizationContext from "../store/organization-context";
 
 function useHandleDataChange() {
   const dataContext = useContext(DataContext)
@@ -29,7 +32,6 @@ function useHandleDataChange() {
   return (id: string, key: string, newValue: string) => {
     const dataIndex = datum?.findIndex((item) => item.id === id);
     if (dataIndex !== -1) {
-      console.log(id, key, newValue)
       let dataUpdated = ""
       if (key === "phone" || key === "email") {
         dataUpdated = JSON.stringify({
@@ -54,11 +56,65 @@ const People = () => {
   const dataContext = useContext(DataContext);
   const { data } = dataContext;
 
-  // Memastikan data telah dimuat sebelum menggunakan handleDataChange
   const handleDataChange = useHandleDataChange()
   const columnsOfPeople = getColumnsOfPeople(handleDataChange)
 
   const [columns, setColumns] = useState<ITableV9Column[]>(columnsOfPeople);
+
+  const { dispatchData } = useContext(DataContext)
+  const { dispatchOrganization } = useContext(OrganizationContext)
+
+  useEffect(() => {
+    const fetchDataPeople = async (): Promise<void> => {
+      try {
+        const config = {
+          headers: {
+            'tenantId': '8bb615ce-bd25-4700-a683-72d23daeb44d'
+          }
+        };
+
+        const response: AxiosResponse<any> = await axios.get(
+          `${baseUrl}/api/v1/people`,
+          config
+        );
+
+        if (response.status !== 200) {
+          throw new Error("Error fetching template");
+        }
+        const jsonData: any = await response.data.data;
+        dispatchData({ type: "GET", data: jsonData });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const fetchDataOrganization = async (): Promise<void> => {
+      try {
+        const config = {
+          headers: {
+            'tenantId': '8bb615ce-bd25-4700-a683-72d23daeb44d'
+          }
+        };
+
+        const response: AxiosResponse<any> = await axios.get(
+          `${baseUrl}/api/v1/organizations`,
+          config
+        );
+
+        if (response.status !== 200) {
+          throw new Error("Error fetching template");
+        }
+        const jsonData: any = await response.data.data;
+        dispatchOrganization({ type: "GET", data: jsonData });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchDataPeople()
+    fetchDataOrganization()
+  }, [])
+
 
   // sort-table
   const [sort, setSort] = useState<ISort>({
@@ -66,10 +122,9 @@ const People = () => {
     sortColumn: "name",
   });
 
-
   // group-table
-  const [groupBy, setGroupBy] = useState("name");
-  const onGroupByChange = (newGroupBy?: string) => {
+  const [groupBy, setGroupBy] = useState("");
+  const onGroupByChange = (_?: string, newGroupBy?: string) => {
     newGroupBy && setGroupBy(newGroupBy);
   };
 
@@ -105,7 +160,6 @@ const People = () => {
               <DialogBody>
                 <DialogTitle>Add People</DialogTitle>
                 <DialogContent>
-                  <Button>Simpannnnnnn</Button>
                   <Form
                     formLabel="Details"
                     fieldList={
@@ -168,7 +222,6 @@ const People = () => {
             </DialogSurface>
           </Dialog>
         </div>
-        {/* {JSON.stringify(data)} */}
 
 
         <div style={{ width: "100%", overflowX: "auto" }}>
@@ -186,7 +239,6 @@ const People = () => {
             groupBy={groupBy}
             onGroupByChange={onGroupByChange}
             menuGroupDataSourceEnabled={data.length > 0 ? true : false}
-
           />
         </div>
       </div>

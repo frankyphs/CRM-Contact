@@ -180,6 +180,7 @@ const NewFieldForm: React.FC<NewFieldForm> = (props) => {
           <DropdownField
             isEditing
             hideActionButtons
+            // @ts-ignore
             disableCustomization
             disableClear
             type="dropdown"
@@ -192,22 +193,22 @@ const NewFieldForm: React.FC<NewFieldForm> = (props) => {
         {(newFieldData.type === "dropdown" ||
           newFieldData.type === "persona" ||
           newFieldData.type === "tags") && (
-          <div className={c.fieldWrapper}>
-            <Label required htmlFor="options">
-              Field Options
-            </Label>
-            <DropdownField
-              hideActionButtons
-              type={newFieldData.type}
-              multiSelect
-              isEditing
-              placeholder="Create Options"
-              options={newFieldOptions}
-              onOptionChange={handleAddOptions}
-            />
-            <Switch label="Multi Option Select" onChange={handleDropdownMultiSelect} />
-          </div>
-        )}
+            <div className={c.fieldWrapper}>
+              <Label required htmlFor="options">
+                Field Options
+              </Label>
+              <DropdownField
+                hideActionButtons
+                type={newFieldData.type}
+                multiSelect
+                isEditing
+                placeholder="Create Options"
+                options={newFieldOptions}
+                onOptionChange={handleAddOptions}
+              />
+              <Switch label="Multi Option Select" onChange={handleDropdownMultiSelect} />
+            </div>
+          )}
       </div>
       <ActionButtonContainer
         onSave={handleFormOnSave}

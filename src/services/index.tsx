@@ -12,8 +12,8 @@ import { IDataSourceOrganization } from "../data";
 
 const DataPeople: React.FC = (): JSX.Element => {
   const { dispatchData } = useContext(DataContext)
-  const { organization, dispatchOrganization } = useContext(OrganizationContext)
   const { dispatchOption } = useContext(OptionContext)
+  const { organization, dispatchOrganization } = useContext(OrganizationContext)
 
   const fetchDataPeople = async (): Promise<void> => {
     try {
@@ -146,7 +146,6 @@ export const patchPeople = async (payload: any, id: any): Promise<void> => {
     if (response.status !== 201) {
       throw new Error("Gagal Add Task");
     }
-
   } catch (error) {
     console.log(error);
   }

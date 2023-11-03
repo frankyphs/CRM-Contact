@@ -46,7 +46,7 @@ export const InputText = (props: IValueComponent) => {
         ) :
           props.onClickNavRouter && props.typeInput === "organization" ? (
             <NavLink
-              to="/organization_detail"
+              to={`/organization_detail/${props.id}`}
               style={{
                 marginTop: "5px",
                 backgroundColor: "transparent",

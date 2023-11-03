@@ -97,6 +97,7 @@ const DraggableFieldList: React.FC<DraggableFieldListProps> = (props) => {
                       onSave={onSaveLabel}
                       style={{ flexGrow: 1, display: "block" }}
                       defaultValue={tempLabel}
+                      // @ts-ignore
                       customRenderInput={{ children: () => <Body1Strong>{props.field.label}</Body1Strong> }}
                       hideActionButtons
                       editOnClickEnabled

@@ -5,7 +5,7 @@ export interface IDataSourceBasic {
   email?: string
   phone?: string
   label?: string
-  address?: string
+  address?: string | undefined
   people?: string
   [key: string]: string | undefined;
 }
@@ -15,7 +15,7 @@ export type KeyValuePair = {
 };
 
 export type Contact = {
-  label: string;
+  label?: string;
   value: string;
   primary: boolean;
 };
@@ -51,6 +51,22 @@ export type IDataSourcePeople = {
   customFields: KeyValuePair;
   organization: IDataSourceOrganization;
 };
+
+export type IDataChange = {
+  fieldKey: string;
+  newValue: string | Contact[];
+  oldValue: string | Contact[];
+  logTime: string
+}
+
+export type IDataLog = {
+  action: string;
+  creatorId: string;
+  dataChanges: IDataChange[];
+  id: string;
+  itemId: string;
+  logTime: string;
+}
 
 export const defaultOption = [
   { id: "1", label: "religion", data: { color: "#FFF3DA" } },

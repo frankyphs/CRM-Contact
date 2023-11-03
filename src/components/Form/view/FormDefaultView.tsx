@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { FormContext, FormContextType } from "../Form"
 import {
   FormFieldEditState,
@@ -180,6 +180,7 @@ const FormDefaultView = () => {
             {...commonFieldProps}
             type={field.type}
             selectedOptions={internalValue?.[field.id] || internalValue?.customField?.[field.id]}
+            // @ts-ignore
             disableCustomization
             multiSelect={field.multiSelect}
             options={field.options}
