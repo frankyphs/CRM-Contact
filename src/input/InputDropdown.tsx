@@ -21,11 +21,11 @@ export const InputDropdown = (props: IValueDropdown) => {
   }, [props.data])
 
   // if user delete an options on row 2, and the deleted options is on row 1, the row 1 automatically have undefined label
-  useEffect(() => {
-    if (!options.some(option => option.id === value[0])) {
-      props.onChange("")
-    }
-  }, [options]);
+  // useEffect(() => {
+  //   if (!options.some(option => option.id === value[0])) {
+  //     props.onChange("")
+  //   }
+  // }, [options]);
 
   const handleNameChange = (newValue: string[]) => {
     setValue(newValue);
